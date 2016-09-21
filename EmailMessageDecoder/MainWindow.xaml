@@ -1,0 +1,107 @@
+﻿<Window x:Class="EmailMessageDecoder.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EmailMessageDecoder"
+        mc:Ignorable="d"
+        Title="MainWindow" Width="640" Height="480">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="File">
+                    <MenuItem x:Name="menuExit" Header="Exit" Click="menu_Click"/>
+                </MenuItem>
+                <MenuItem Header="Tools">
+                    <MenuItem x:Name="menuDisplaySource" Header="Source"/>
+                    <MenuItem x:Name="menuDisplayAttachments" Header="Attachments"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" VerticalAlignment="top">
+                    <GroupBox x:Name="groupboxFilename" Header="Filename" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" x:Name="textboxFilename" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="Enter filename" VerticalAlignment="Top"/>
+                            <Button Grid.Column="1" x:Name="buttonFileSelector" Content="..." Height="23" VerticalAlignment="Top" Width="25" Margin="4,0,0,0" Click="button_Click"/>
+                            <Button Grid.Column="2" x:Name="buttonLoad" Content="Load" Height="23" VerticalAlignment="Bottom" Width="50" Margin="4,0,0,0" Click="button_Click"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+                <Grid Grid.Row="1" VerticalAlignment="Top">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <GroupBox Grid.Column="0" x:Name="groupboxServerConnection" Header="Server Connection" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Label x:Name="textEHLO" Content="Received chain:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="100"/>
+                                <TextBox x:Name="textboxEHLO" HorizontalAlignment="Stretch" Height="23" Margin="105,4,0,0" TextWrapping="Nowrap" Text="Display Received chain" VerticalAlignment="Top" IsEnabled="False"/>
+                                <Label x:Name="lableMessageID" Content="Message-Id:" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Width="100"/>
+                                <TextBox x:Name="textboxsMessageId" HorizontalAlignment="Stretch" Height="23" Margin="105,28,0,0" TextWrapping="Nowrap" Text="Display Message-ID field" VerticalAlignment="Top" IsEnabled="False"/>
+                                <Label x:Name="labelSignature" Content="Signature" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top" Width="100"/>
+                                <TextBox x:Name="textboxSignature" HorizontalAlignment="Stretch" Height="23" Margin="105,52,0,0" TextWrapping="Nowrap" Text="Display DKIM Signature" VerticalAlignment="Top" IsEnabled="False"/>
+                                <Label x:Name="labelMIMEType" Content="MIME Type" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="100"/>
+                                <TextBox x:Name="textboxMIMEType" HorizontalAlignment="Stretch" Height="23" Margin="105,76,0,0" TextWrapping="Nowrap" Text="Display MIME-Version: field" VerticalAlignment="Top" IsEnabled="False"/>
+                                <Label x:Name="labelContentType" Content="Content Type" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" Width="100"/>
+                                <TextBox x:Name="textboxContentType" HorizontalAlignment="Stretch" Height="23" Margin="105,100,0,0" TextWrapping="Nowrap" Text="Display Content-Type: field" VerticalAlignment="Top" IsEnabled="False"/>
+                                <Label x:Name="labelXChain" Content="X-Information" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Width="100"/>
+                                <TextBox x:Name="textboxXChain" HorizontalAlignment="Stretch" Height="23" Margin="105,124,0,0" TextWrapping="Nowrap" Text="Display X- chain" VerticalAlignment="Top" IsEnabled="False"/>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Grid.Column="1" x:Name="groupBoxHeaderText" Header="Text Header" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Label x:Name="labelFrom" Content="From:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="100"/>
+                                <TextBox x:Name="textboxFrom" HorizontalAlignment="Stretch" Height="23" Margin="105,4,0,0" TextWrapping="Nowrap" Text="Display From: field" VerticalAlignment="Top" IsEnabled="False"/>
+                                <Label x:Name="labelTo" Content="To:" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Width="100"/>
+                                <TextBox x:Name="textboxTo" HorizontalAlignment="Stretch" Height="23" Margin="105,28,0,0" TextWrapping="Nowrap" Text="Display To: field" VerticalAlignment="Top" IsEnabled="False"/>
+                                <Label x:Name="labelReplyto" Content="Reply-To:" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top" Width="100"/>
+                                <TextBox x:Name="textboxReplyto" HorizontalAlignment="Stretch" Height="23" Margin="105,52,0,0" TextWrapping="Nowrap" Text="Display Reply-To: field (if present)" VerticalAlignment="Top" IsEnabled="False"/>
+                                <Label x:Name="labelInReplyTo" Content="In-Reply-To:" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="100"/>
+                                <TextBox x:Name="textboxInReplyTo" HorizontalAlignment="Stretch" Height="23" Margin="105,76,0,0" TextWrapping="NoWrap" Text="Display In-Reply-To: field" VerticalAlignment="Top" IsEnabled="False"/>
+                                <Label x:Name="labelSubject" Content="Subject:" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" Width="100"/>
+                                <TextBox x:Name="textboxSubject" HorizontalAlignment="Stretch" Height="23" Margin="105,100,0,0" TextWrapping="Nowrap" Text="Display Subject: field" VerticalAlignment="Top" IsEnabled="False"/>
+                                <Label x:Name="label1Date" Content="Date:" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Width="100"/>
+                                <TextBox x:Name="textboxDate" HorizontalAlignment="Stretch" Height="23" Margin="105,124,0,0" TextWrapping="NoWrap" Text="Display Date: field" VerticalAlignment="Top" IsEnabled="False"/>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <GroupBox Grid.Row="0" x:Name="groupboxData" Header="Data" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0" x:Name="textboxData" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="Display contents of text message if present" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" IsEnabled="False"/>
+                        <TextBox Grid.Column="1" x:Name="textboxAttachments" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="Show list of attachments (if present)" VerticalAlignment="Stretch" Width="200" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" IsEnabled="False"/>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
