@@ -40,9 +40,9 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" x:Name="textboxFilename" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="Enter filename" VerticalAlignment="Top"/>
-                            <Button Grid.Column="1" x:Name="buttonFileSelector" Content="..." Height="23" VerticalAlignment="Top" Width="25" Margin="4,0,0,0" Click="button_Click"/>
-                            <Button Grid.Column="2" x:Name="buttonLoad" Content="Load" Height="23" VerticalAlignment="Bottom" Width="50" Margin="4,0,0,0" Click="button_Click"/>
+                            <TextBox Grid.Column="0" x:Name="textboxFilename" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="Enter filename by using the buttons to the right -->" VerticalAlignment="Top" ToolTip="Use the buttons to the right to select a file to view" IsEnabled="False"/>
+                            <Button Grid.Column="1" x:Name="buttonFileSelector" Content="..." Height="23" VerticalAlignment="Top" Width="25" Margin="4,0,0,0" Click="button_Click" ToolTip="Click this button to use a file selector to find the email file to view."/>
+                            <Button Grid.Column="2" x:Name="buttonLoad" Content="Load" Height="23" VerticalAlignment="Bottom" Width="50" Margin="4,0,0,0" Click="button_Click" ToolTip="After selecting the file to view, click this button to load the file and analyze the contents."/>
                         </Grid>
                     </GroupBox>
                 </Grid>
